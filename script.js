@@ -439,7 +439,7 @@ function createFootprint(x, y, angle, isLeftFoot) {
   paw.style.transform = `rotate(${angle}deg) scaleX(${scale})`;
 
   const img = document.createElement('img');
-  img.src = 'images/footprint_old.svg';
+  img.src = 'images/footprint_new.svg';
   paw.appendChild(img);
 
   footprintContainer.appendChild(paw);
@@ -448,7 +448,11 @@ function createFootprint(x, y, angle, isLeftFoot) {
 
   setTimeout(() => {
     paw.style.opacity = 0;
-    setTimeout(() => paw.remove(), 400);
+    setTimeout(() => {
+      if (paw.parentNode) {
+        paw.remove();
+      }
+    }, 450); // Wait slightly longer than CSS transition (400ms) to ensure completion
   }, 600); // footprint visible duration
 
   return paw;
